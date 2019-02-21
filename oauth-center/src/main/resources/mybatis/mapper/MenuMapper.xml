@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wyn.oauth.center.dao.MenuDao" >
+    <resultMap id="BaseResultMap" type="MenuEntity" >
+        <id column="id" property="id" jdbcType="INTEGER"></id>
+        <result column="code" property="code" jdbcType="VARCHAR" />
+        <result column="pCode" property="p_code" jdbcType="VARCHAR" />
+        <result column="pId" property="p_id" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="url" property="url" jdbcType="VARCHAR" />
+        <result column="isMenu" property="is_menu" jdbcType="INTEGER" />
+        <result column="level" property="level" jdbcType="INTEGER" />
+        <result column="sort" property="sort" jdbcType="INTEGER" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="icon" property="icon" jdbcType="VARCHAR" />
+        <result column="createTime" property="create_time" jdbcType="DATE" />
+        <result column="updateTime" property="update_time" jdbcType="DATE" />
+    </resultMap>
+
+
+    <sql id="Base_Column_List" >
+           id, code, p_code, p_id, name, url, is_menu, level, sort, icon, create_time, update_time
+    </sql>
+
+    <select id="getMenusByRoleId" resultMap="BaseResultMap">
+       select menu.id, menu.code, menu.p_code, menu.p_id, menu.name, menu.url, menu.is_menu, menu.level, menu.sort,
+       menu.icon, menu.create_time, menu.update_time
+       from rc_menu menu,rc_privilege p
+       where menu.id=p.menu_id and p.role_id= #{role_id}
+    </select>
+
+</mapper>

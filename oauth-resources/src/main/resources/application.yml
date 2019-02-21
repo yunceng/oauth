@@ -1,0 +1,35 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: resources
+  datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://192.168.20.30:3306/oauth?useUnicode=true&characterEncoding=utf-8
+      username: root
+      password: 123456
+endpoints:
+  health:
+    sensitive: false
+    enabled: true
+management:
+  security:
+    enabled: false
+
+security:
+  oauth2:
+    resource:
+      id: oauth-resource
+      user-info-uri: http://127.0.0.1:8090/user
+      prefer-token-info: false
+    client:
+      access-token-validity-seconds: 86400
+      client-id: weibo
+      client-secret: qppoLXKYFi9OCyT1R8xshAxlpkBg1ubheqiolr6JDxVgkT0z
+      user-authorization-uri: http://127.0.0.1:8090/oauth/authorize
+      grant-type: password
+      scope: read
+      access-token-uri: http://127.0.0.1:8090/oauth/token
+    authorization:
+      check-token-access: http://127.0.0.1:8090/oauth/check_token
